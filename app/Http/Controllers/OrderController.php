@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use App\Models\Order;
-use App\Models\Partner;
 use App\Models\OrderProduct;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -76,6 +77,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
         $order = Order::find($id);
         $order->partner_id = $request->partner_id;
         $order->client_email = $request->client_email;
@@ -83,11 +86,14 @@ class OrderController extends Controller
         $order->save();
         $order->product()->sync($request->product);
 
-        foreach ($request->product as $id) {
+        foreach ($request->product as $id_prod) {
 
-            $q_up = OrderProduct::where('order_id', $order->id)->where('product_id', $id)->first();
-            $q_up->quantity = $request->quantity[$id];
+            $q_up = OrderProduct::where('order_id', $order->id)->where('product_id', $id_prod)->first();
+            $q_up->quantity = $request->quantity[$id_prod];
             $q_up->save();
+        }
+        if ($request->status == 20) {
+            SendEmail::dispatch($order);
         }
 
         return redirect(route('orders.index'));

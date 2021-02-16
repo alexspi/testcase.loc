@@ -1,10 +1,8 @@
 @extends('main')
 @section('content')
-    <div class="mt-5">
-
-
+    <section class="mt-5">
         <div class="container">
-
+            <a class="btn btn-info mb-3" href="/check">Проверить просроченные</a>
             <table class="table-striped table-hover w-100 text-center">
                 <thead class="thead-dark">
                 <th>ID заказа</th>
@@ -16,7 +14,8 @@
                 <tbody>
                 @foreach($orders as $order)
                     <tr>
-                        <td><a href="{{ url('orders/' . $order->id . '/edit') }}" target="_blank">{{$order->id}}</a></td>
+                        <td><a href="{{ url('orders/' . $order->id . '/edit') }}" target="_blank">{{$order->id}}</a>
+                        </td>
                         <td>{{$order->partner->name}}</td>
                         <td>{{SummOrder($order)}}</td>
                         <td>
@@ -38,7 +37,7 @@
                             </table>
                         </td>
 
-                        <td>{{OrderStatus($order->status)}}</td>
+                        <td>{!! OrderStatus($order->status)!!}</td>
 
                     </tr>
                 @endforeach
@@ -51,5 +50,5 @@
         <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
 
         </div>
-    </div>
+    </section>
 @endsection

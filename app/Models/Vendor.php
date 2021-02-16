@@ -21,7 +21,7 @@ class Vendor extends Model
      *
      * @var array
      */
-    protected $fillable = ['email','name'];
+    protected $fillable = ['emails','name'];
 
 
     /**

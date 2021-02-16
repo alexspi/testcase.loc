@@ -57,11 +57,13 @@ function SummOrder($order)
 function OrderStatus($status)
 {
     if ($status === 20)
-        return "Выполнен";
+        return '<span class="badge badge-success">Выполнен</span>';
     elseif ($status === 0) {
-        return "Новый";
+        return '<span class="badge badge-info">Новый</span>';
+    } elseif ($status === 10) {
+        return '<span class="badge badge-primary">Текущий</span>';
     } else {
-        return "Текущий";
+        return '<span class="badge badge-danger">Просрочен</span>';
     }
 
 }

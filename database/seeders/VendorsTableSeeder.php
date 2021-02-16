@@ -21,7 +21,7 @@ class VendorsTableSeeder extends Seeder
         for ($i = 0; $i < $limit; $i++) {
 
             Vendor::create([
-                'email' => $faker->unique()->email,
+                'emails' => $faker->unique()->email,
                 'name' => $faker->unique()->company,
             ]);
         }
