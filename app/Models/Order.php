@@ -23,6 +23,10 @@ class Order extends Model
      * @var array
      */
     protected $fillable = ['status', 'client_email', 'partner_id','delivery_dt'];
+    /**
+     * @var mixed
+     */
+
 
 
     /**

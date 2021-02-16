@@ -35,6 +35,11 @@ class OrderCompleted extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.completed');
+        return $this->view('emails.completed')
+            ->with([
+                'orderNumber'=>$this->order->id,
+                'orderProductList'=>$this->order->product,
+                'orderFullPrice' =>SummOrder($this->order)
+            ]);
     }
 }

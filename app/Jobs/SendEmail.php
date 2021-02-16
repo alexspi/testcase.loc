@@ -2,12 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Mail\OrderCompleted;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmail implements ShouldQueue
 {
@@ -32,6 +34,8 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        //
+
+
+        Mail::to()->send(new OrderCompleted($this->order));
     }
 }
