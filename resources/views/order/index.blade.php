@@ -16,7 +16,7 @@
                 <tbody>
                 @foreach($orders as $order)
                     <tr>
-                        <td><a href="{{ url('orders/' . $order->id . '/edit') }}">{{$order->id}}</a></td>
+                        <td><a href="{{ url('orders/' . $order->id . '/edit') }}" target="_blank">{{$order->id}}</a></td>
                         <td>{{$order->partner->name}}</td>
                         <td>{{SummOrder($order)}}</td>
                         <td>
