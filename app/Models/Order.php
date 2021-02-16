@@ -29,7 +29,7 @@ class Order extends Model
 
     public function scopeOfStatus($query, $status)
     {
-        return $query->where('status', $status);
+        return $query->where('status', $status)->orderBy('delivery_dt', 'desc');
     }
 
     /**

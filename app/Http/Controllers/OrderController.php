@@ -24,7 +24,7 @@ class OrderController extends Controller
         $now = Order::ofStatus('10')->paginate(50);
         $expired = Order::ofStatus('5')->paginate(50);
 
-        return view('order.index', compact('orders'));
+        return view('order.index', compact('orders','new','now','ended','expired'));
     }
 
     /**
