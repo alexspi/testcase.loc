@@ -17,7 +17,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('product')->take(10)->paginate(50);
+        $orders = Order::with('product')->paginate(50);
+
+        $ended = Order::ofStatus('20')->paginate(50);
+        $new = Order::ofStatus('0')->paginate(50);
+        $now = Order::ofStatus('10')->paginate(50);
+        $expired = Order::ofStatus('5')->paginate(50);
 
         return view('order.index', compact('orders'));
     }

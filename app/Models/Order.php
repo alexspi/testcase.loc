@@ -27,7 +27,10 @@ class Order extends Model
      * @var mixed
      */
 
-
+    public function scopeOfStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
