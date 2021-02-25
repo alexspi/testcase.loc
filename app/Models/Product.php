@@ -24,8 +24,6 @@ class Product extends Model
     protected $fillable = ['name', 'price', 'vendor_id'];
 
 
-
-
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
@@ -36,9 +34,11 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_products', 'order_id', 'product_id');
     }
 
-    public function quant()
-    {
-        return $this->hasOne(OrderProduct::class);
-    }
 
+    public function scopeOfPrice($query,$id)
+    {
+//        $pr=$query->whereId($id)->first();
+        return $query->whereId($id)->first()->price;
+
+    }
 }

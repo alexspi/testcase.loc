@@ -49,7 +49,7 @@ function SummOrder($order)
 {
     $summ = 0;
     foreach ($order->product as $item) {
-        $summ = $item->quant->quantity * $item->quant->price;
+        $summ = $item->pivot->quantity * $item->pivot->price;
     }
     return $summ;
 }
@@ -68,4 +68,8 @@ function OrderStatus($status)
 
 }
 
+function GetList($id){
+
+    return \App\Models\Order::whereId($id)->first();
+}
 ?>

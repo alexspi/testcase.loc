@@ -1,0 +1,10 @@
+{
+    "/js/datatables.js": "/js/datatables.js",
+    "/css/datatables.css": "/css/datatables.css",
+    "/vendor/jquery/jquery.js": "/vendor/jquery/jquery.js",
+    "/vendor/jquery/jquery.min.js": "/vendor/jquery/jquery.min.js",
+    "/vendor/jquery/jquery.min.map": "/vendor/jquery/jquery.min.map",
+    "/vendor/jquery/jquery.slim.js": "/vendor/jquery/jquery.slim.js",
+    "/vendor/jquery/jquery.slim.min.js": "/vendor/jquery/jquery.slim.min.js",
+    "/vendor/jquery/jquery.slim.min.map": "/vendor/jquery/jquery.slim.min.map"
+}

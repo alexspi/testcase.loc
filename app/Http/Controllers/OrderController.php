@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\OrdersDataTable;
 use App\Jobs\SendEmail;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Partner;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
+
+    public function orderdt(OrdersDataTable $dataTable)
+    {
+        return $dataTable->render('order.dt');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,12 +28,16 @@ class OrderController extends Controller
     {
         $orders = Order::with('product')->paginate(50);
 
+
+        $test = Order::with('product')->take(5)->first();
+
+
         $ended = Order::ofStatus('20')->paginate(50);
         $new = Order::ofStatus('0')->paginate(50);
         $now = Order::ofStatus('10')->paginate(50);
         $expired = Order::ofStatus('5')->paginate(50);
 
-        return view('order.index', compact('orders','new','now','ended','expired'));
+        return view('order.index', compact('orders', 'new', 'now', 'ended', 'expired'));
     }
 
     /**
@@ -89,14 +102,18 @@ class OrderController extends Controller
         $order->client_email = $request->client_email;
 
         $order->save();
-        $order->product()->sync($request->product);
 
-        foreach ($request->product as $id_prod) {
+        $products = (array)$request->product;
+        $uuu = (array)$request->quantity;
 
-            $q_up = OrderProduct::where('order_id', $order->id)->where('product_id', $id_prod)->first();
-            $q_up->quantity = $request->quantity[$id_prod];
-            $q_up->save();
+        foreach ($products as $id_prod) {
+            $syncData[$id_prod]['quantity'] = $uuu[$id_prod];
+            $syncData[$id_prod]['price'] =Product::OfPrice($id_prod);
         }
+
+//dd($syncData);
+        $order->product()->sync($syncData);
+
         if ($request->status == 20) {
             SendEmail::dispatch($order);
         }

@@ -20,7 +20,7 @@ class PartnersTableSeeder extends Seeder
 
         for ($i = 0; $i < $limit; $i++) {
             Partner::create([
-                'emails' => $faker->unique()->email,
+                'email' => $faker->unique()->email,
                 'name' => $faker->unique()->company,
             ]);
         }

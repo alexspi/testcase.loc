@@ -1,4 +1,5 @@
-@extends('main')
+@extends('layouts.app')
+
 @section('content')
     <section class="mt-5">
         <div class="container">
@@ -31,8 +32,8 @@
                                 @foreach($order->product as $product)
                                     <tr>
                                         <td>{{$product->name}}</td>
-                                        <td>{{$product->quant->quantity}}</td>
-                                        <td>{{$product->quant->price}}</td>
+                                        <td>{{$product->pivot->quantity}}</td>
+                                        <td>{{$product->pivot->price}}</td>
                                     </tr>
                                 @endforeach
 
